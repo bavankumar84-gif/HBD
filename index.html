@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Bakkiya ✨ | A Digital Surprise</title>
+    <meta name="description" content="A bespoke, interactive digital birthday surprise for Bakkiya, filled with special memories, a personal letter, and interactive wishes.">
+    
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Canvas Background Particle Layer -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Heart Cursor Trail Layer -->
+    <div id="heart-cursor-container"></div>
+
+    <!-- Floating Minimal Music Toggle Button (Top Right) -->
+    <button id="audio-toggle-btn" class="audio-control-btn" aria-label="Toggle background music">
+        <span class="music-icon">♫</span>
+        <div class="audio-wave">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+
+    <!-- HTML5 Audio Element for attached music.mp3 -->
+    <audio id="bg-audio" preload="auto" loop src="music.mp3"></audio>
+
+    <!-- App Main Wrapper -->
+    <main id="app-container">
+
+        <!-- ==========================================================================
+             01. FIRST SCREEN — 🎁 INTERACTIVE GIFT OPENING
+             ========================================================================== -->
+        <section id="gift-screen" class="full-screen-stage">
+            <div id="gift-prompt-wrap" class="gift-prompt-wrap">
+                <span class="accent-pill">Special Surprise</span>
+                <p class="gift-subtitle">A little surprise for you...</p>
+
+                <!-- 3D Interactive Floating Gift Box -->
+                <div id="interactive-gift-box" class="interactive-gift-box" title="Tap the gift to open!">
+                    <div class="gift-glow-aura"></div>
+                    <div class="gift-3d">
+                        <div class="gift-lid-wrap">
+                            <div class="gift-lid">
+                                <div class="gift-lid-ribbon"></div>
+                                <div class="gift-bow"></div>
+                            </div>
+                        </div>
+                        <div class="gift-body">
+                            <div class="gift-ribbon-v"></div>
+                            <div class="gift-ribbon-h"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="gift-tap-hint">Tap the gift to open ✨</p>
+            </div>
+
+            <!-- Revealed Content after Gift Opens -->
+            <div id="gift-reveal-content" class="gift-reveal-content hidden-content">
+                <h2 class="reveal-intro-subtitle">Hey, BAKKIYA...</h2>
+                <h1 class="reveal-intro-title">This little surprise is just for you ❤️</h1>
+                <div class="reveal-cta-wrap">
+                    <button id="lets-begin-btn" class="btn-primary interactive-hover-btn">
+                        Let's Begin
+                        <span class="btn-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+             02. MAIN BIRTHDAY EXPERIENCE (Revealed after clicking "Let's Begin")
+             ========================================================================== -->
+        <div id="main-experience" class="main-experience hidden-experience">
+
+            <!-- 02.1 — BIRTHDAY REVEAL HEADER & HERO CARD -->
+            <section id="reveal-stage" class="section-stage">
+                <span class="accent-pill">Happy Birthday</span>
+                <div class="hero-photo-card">
+                    <img id="reveal-hero-img" src="images/photo1.jpg" alt="Bakkiya Birthday Reveal">
+                </div>
+                <h1 class="gradient-heading">HAPPY BIRTHDAY<br>BAKKIYA 🎂</h1>
+                <p class="sub-heading">Scroll down to unlock your cherished memories...</p>
+            </section>
+
+            <!-- 02.2 — THREE SPECIAL MOMENTS (MEMORY CARDS) -->
+            <section id="memories-stage" class="section-stage">
+                <span class="accent-pill">Memories</span>
+                <h2 class="gradient-heading">A Few Moments, A Lot of Memories</h2>
+                <p class="sub-heading">Every picture tells a story of joy, laughter, and unforgettable times.</p>
+
+                <div id="memories-container" class="memories-container">
+                    <!-- Populated dynamically from config.js -->
+                </div>
+            </section>
+
+            <!-- 02.3 — PERSONAL LETTER -->
+            <section id="letter-stage" class="section-stage">
+                <div class="letter-stage-container">
+                    <span class="accent-pill" style="display: block; text-align: center; margin-bottom: 24px;">From the Heart</span>
+                    <div class="letter-card">
+                        <div class="letter-photo-wrap">
+                            <img id="letter-side-img" src="images/photo2.jpg" alt="Bakkiya Memory">
+                        </div>
+                        <div class="letter-body">
+                            <h3 class="letter-header-title">A little message for you...</h3>
+                            <div class="typewriter-container">
+                                <span id="typewriter-text" class="typewriter-text"></span>
+                                <span class="typewriter-cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 02.4 — INTERACTIVE BIRTHDAY CAKE -->
+            <section id="cake-stage" class="section-stage">
+                <span class="accent-pill">Time to Celebrate</span>
+                <h2 id="cake-main-heading" class="gradient-heading">One more thing...</h2>
+                <p id="cake-sub-heading" class="sub-heading">Make a wish ✨</p>
+
+                <div class="cake-wrapper">
+                    <svg class="svg-cake" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Plate -->
+                        <ellipse cx="150" cy="250" rx="120" ry="18" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                        <ellipse cx="150" cy="246" rx="110" ry="14" fill="url(#plateGrad)"/>
+                        
+                        <!-- Cake Bottom -->
+                        <path d="M 50 180 Q 150 210 250 180 L 250 230 Q 150 260 50 230 Z" fill="url(#cakeBottomGrad)"/>
+                        <path d="M 50 180 Q 150 210 250 180 Q 150 160 50 180 Z" fill="#f472b6"/>
+                        
+                        <!-- Middle Wave -->
+                        <path d="M 50 180 Q 80 195 100 180 Q 130 195 150 180 Q 180 195 200 180 Q 230 195 250 180 L 250 190 Q 150 220 50 190 Z" fill="#ffffff" opacity="0.9"/>
+
+                        <!-- Cake Top -->
+                        <path d="M 70 120 Q 150 145 230 120 L 230 170 Q 150 195 70 170 Z" fill="url(#cakeTopGrad)"/>
+                        <ellipse cx="150" cy="120" rx="80" ry="20" fill="#fbcfe8"/>
+
+                        <!-- Frosting Drips -->
+                        <path d="M 70 120 C 85 140, 95 125, 110 135 C 130 142, 140 125, 160 138 C 180 130, 200 140, 230 120 L 230 125 C 200 145, 180 135, 160 142 C 140 130, 130 148, 110 140 C 95 130, 85 145, 70 125 Z" fill="#ffffff"/>
+
+                        <!-- 3 Candles -->
+                        <!-- Candle 1 -->
+                        <rect x="105" y="70" width="10" height="40" rx="4" fill="url(#candleGrad1)"/>
+                        <line x1="110" y1="70" x2="110" y2="62" stroke="#475569" stroke-width="2"/>
+                        <path id="flame-1" class="candle-flame" d="M 110 46 C 103 55, 110 62, 110 62 C 110 62, 117 55, 110 46 Z" fill="url(#flameGrad)"/>
+
+                        <!-- Candle 2 -->
+                        <rect x="145" y="60" width="10" height="50" rx="4" fill="url(#candleGrad2)"/>
+                        <line x1="150" y1="60" x2="150" y2="52" stroke="#475569" stroke-width="2"/>
+                        <path id="flame-2" class="candle-flame" d="M 150 36 C 143 45, 150 52, 150 52 C 150 52, 157 45, 150 36 Z" fill="url(#flameGrad)"/>
+
+                        <!-- Candle 3 -->
+                        <rect x="185" y="70" width="10" height="40" rx="4" fill="url(#candleGrad1)"/>
+                        <line x1="190" y1="70" x2="190" y2="62" stroke="#475569" stroke-width="2"/>
+                        <path id="flame-3" class="candle-flame" d="M 190 46 C 183 55, 190 62, 190 62 C 190 62, 197 55, 190 46 Z" fill="url(#flameGrad)"/>
+
+                        <defs>
+                            <linearGradient id="plateGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#cbd5e1"/>
+                                <stop offset="100%" stop-color="#64748b"/>
+                            </linearGradient>
+                            <linearGradient id="cakeBottomGrad" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#ec4899"/>
+                                <stop offset="100%" stop-color="#be185d"/>
+                            </linearGradient>
+                            <linearGradient id="cakeTopGrad" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#f472b6"/>
+                                <stop offset="100%" stop-color="#db2777"/>
+                            </linearGradient>
+                            <linearGradient id="candleGrad1" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#38bdf8"/>
+                                <stop offset="100%" stop-color="#0284c7"/>
+                            </linearGradient>
+                            <linearGradient id="candleGrad2" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#c084fc"/>
+                                <stop offset="100%" stop-color="#7e22ce"/>
+                            </linearGradient>
+                            <linearGradient id="flameGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#fef08a"/>
+                                <stop offset="50%" stop-color="#f59e0b"/>
+                                <stop offset="100%" stop-color="#ef4444"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+
+                <button id="blow-candles-btn" class="btn-primary interactive-hover-btn">
+                    Blow the Candles 🌬️
+                </button>
+
+                <div id="wish-status-badge" class="wish-status-badge">
+                    Wish granted ✨
+                </div>
+            </section>
+
+            <!-- 02.5 — FINAL PHOTO SURPRISE -->
+            <section id="final-stage" class="section-stage">
+                <span class="accent-pill">Forever Special</span>
+                <div class="final-composition">
+                    <div id="floating-photos-grid" class="floating-photos-grid">
+                        <!-- Populated dynamically -->
+                    </div>
+
+                    <div class="final-wish-box">
+                        <h1 class="gradient-heading">HAPPY BIRTHDAY<br>BAKKIYA ❤️</h1>
+                        <p id="final-wish-text" class="final-wish-text"></p>
+                    </div>
+
+                    <div class="footer-credit">
+                        <p id="footer-text"></p>
+                    </div>
+
+                    <button id="replay-btn" class="btn-primary replay-btn interactive-hover-btn">
+                        Replay the Surprise ↻
+                    </button>
+                </div>
+            </section>
+
+        </div> <!-- End of #main-experience -->
+
+    </main>
+
+    <!-- Configuration Script -->
+    <script src="config.js"></script>
+    
+    <!-- Application Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
